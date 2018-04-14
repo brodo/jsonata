@@ -4764,6 +4764,18 @@ var jsonata = (function() {
     }
 
     /**
+     * Converts one or several character codes into a string
+     * @param {Array} [arg] - An array of integer character codes
+     * @returns {String} - The Corresponding character
+     */
+    function functionFromCharCodes(arg){
+        if(typeof arg === 'undefined') {
+            return undefined;
+        }
+        return String.fromCharCode.apply(null, arg);
+    }
+
+    /**
      * Create frame
      * @param {Object} enclosingEnvironment - Enclosing environment
      * @returns {{bind: bind, lookup: lookup}} Created frame
@@ -4839,6 +4851,7 @@ var jsonata = (function() {
     staticFrame.bind('fromMillis', defineFunction(functionFromMillis, '<n-:s>'));
     staticFrame.bind('clone', defineFunction(functionClone, '<(oa)-:o>'));
     staticFrame.bind('charCode', defineFunction(functionCharCode, '<s-n?:n>'));
+    staticFrame.bind('fromCharCode', defineFunction(functionFromCharCodes, '<a<n>-:s>'));
 
     /**
      * Error codes
